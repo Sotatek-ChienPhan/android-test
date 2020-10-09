@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:background="?colorPrimary"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvToolbarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="2sp"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:translationY="-1.05sp"
+        tools:text="title" />
+</com.google.android.material.appbar.MaterialToolbar>

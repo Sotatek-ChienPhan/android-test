@@ -1,0 +1,55 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="EditText.Layout" parent="Widget.Design.TextInputLayout">
+        <item name="endIconMode">none</item>
+        <!--        <item name="endIconDrawable">@drawable/ic_clear</item>-->
+        <item name="endIconTint">@null</item>
+        <item name="hintTextAppearance">@style/hintBox</item>
+        <item name="hintTextColor">#828282</item>
+        <item name="android:textColorHint">@color/text_gray</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorHint">#828282</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textCursorDrawable">@drawable/cusor_edt</item>
+        <item name="android:background">@drawable/bg_edt</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:maxLength">255</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
+    <style name="hintBox" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="Button_Normal" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="cornerRadius">20dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_button_normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="rippleColor">#ffffff</item>
+    </style>
+    <style name="ProgressDialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+    <color name="white">#ffffff</color>
+</resources>

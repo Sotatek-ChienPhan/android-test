@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android Test</string>
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="exception_unknownhost">Unable to locate the server. Please check your network connection.</string>
+    <string name="exception_connect_timeout">Unable to connect to the server. Please check your network connection.</string>
+    <string name="exception_socket_timeout">The connection has timed out. Please try again.</string>
+    <string name="exception_socket">There are some problems with the connection. Please try again.</string>
+    <string name="exception_ssl_handshake">Your connection is not secure.</string>
+    <string name="user_name">User name</string>
+    <string name="error_empty_username">Username is not empty</string>
+    <string name="error_empty_password">Password is not empty</string>
+</resources>
