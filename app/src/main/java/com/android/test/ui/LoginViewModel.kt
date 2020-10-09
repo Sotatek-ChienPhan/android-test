@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.android.test.base.BaseViewModel
 import com.android.test.base.SingleLiveEvent
 import com.android.test.network.Resource
+import com.android.test.utils.Constant
+import com.android.test.utils.SharedPreferenceManager
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -34,9 +36,16 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
             loginRepository.login(request).collect { resource ->
                 when (resource) {
                     is Resource.Success -> {
-                        showMessageSuccessLiveData.postValue("Login Success")
                         loadingLiveData.postValue(false)
-                        loginRepository.saveUser(resource.data.user)
+                        val response = resource.data.body()
+                        if (response?.errorCode == "00") {
+                            showMessageSuccessLiveData.postValue(response.errorMessage)
+                            loginRepository.saveUser(response.user)
+                            val xAcc = resource.data.headers()[Constant.X_ACC]
+                            SharedPreferenceManager.put(Constant.X_ACC, xAcc)
+                        } else {
+                            showMessageSuccessLiveData.postValue("Your password is incorrect.")
+                        }
                     }
                     is Resource.Failure -> {
                         loadingLiveData.postValue(false)

@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
 import retrofit2.HttpException
+import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketException
 import java.net.SocketTimeoutException
@@ -34,7 +35,29 @@ fun <E : DomainError> error(value: E): Either<E, Nothing> = Either.Failure(value
  */
 inline fun <V> eitherNetwork(errorClass: KClass<out BackendTypedError> = BaseError::class, action: () -> V): Either<DomainError, V> =
         try {
-            value(action())
+            val responseApi  = action()
+            if (responseApi is Response<*>) {
+                if (responseApi.isSuccessful) {
+                    value(responseApi)
+                } else {
+                    val httpCode = responseApi.code()
+                    val httpMessage = responseApi.message() ?: ""
+                    val httpBody = responseApi.errorBody().toString()
+                    try {
+                        error(when (httpBody) {
+                            null -> DomainError.ApiError(httpCode, httpMessage)
+                            else -> DomainError.ApiError(httpCode, httpMessage, Gson().fromJson(httpBody, errorClass.java))
+                        })
+                    } catch (e: Exception) {
+                        error(when {
+                            (e is JsonSyntaxException && httpCode >= 500) -> DomainError.ApiError(httpCode, httpMessage, null)
+                            else -> DomainError.SystemException(e)
+                        })
+                    }
+                }
+            } else {
+                value(responseApi)
+            }
         } catch (httpException: HttpException) {
             val httpCode = httpException.code()
             val httpMessage = httpException.message ?: ""

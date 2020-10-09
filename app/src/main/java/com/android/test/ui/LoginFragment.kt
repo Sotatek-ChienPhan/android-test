@@ -23,11 +23,14 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             showProgress(it)
         })
         viewModel.authRuleLiveData.observe(viewLifecycleOwner, {
-            tvErrorUserName.text = if (it.userName.isNullOrEmpty()) getString(R.string.error_empty_username) else ""
-            tvErrorPassword.text = if (it.password.isNullOrEmpty()) getString(R.string.error_empty_username) else ""
+            tvErrorUserName.text = if (it.userName?.isEmpty() == true) getString(R.string.error_empty_username) else ""
+            tvErrorPassword.text = if (it.password?.isEmpty() == true) getString(R.string.error_empty_username) else ""
             btnRegister.setOnDebouncedClickListener { _->
                 if (!it.userName.isNullOrEmpty() && !it.password.isNullOrEmpty()) {
                     viewModel.login(it.getInput())
+                } else {
+                    tvErrorUserName.text = if (it.userName.isNullOrEmpty()) getString(R.string.error_empty_username) else ""
+                    tvErrorPassword.text = if (it.password.isNullOrEmpty()) getString(R.string.error_empty_username) else ""
                 }
             }
         })
